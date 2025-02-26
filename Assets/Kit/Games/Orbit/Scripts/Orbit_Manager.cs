@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class Orbit_Manager : PlayerEditor
 {
@@ -54,6 +55,11 @@ public class Orbit_Manager : PlayerEditor
     {
         if (collision.CompareTag("Point"))
         {
+            if (Device.generation.ToString().Contains("iPhone") && SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.Vibration) == 1)
+            {
+                Debug.Log("Vibro");
+                Handheld.Vibrate();
+            }
             RandomPointPosition();
             if (Time.timeScale < 1.8f)
             {

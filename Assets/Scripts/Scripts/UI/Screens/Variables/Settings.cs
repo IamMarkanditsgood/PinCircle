@@ -22,6 +22,11 @@ public class Settings : BasicScreen
 
     private void Start()
     {
+        if (!SaveManager.PlayerPrefs.IsSaved(GameSaveKeys.Vibration))
+        {
+            SaveManager.PlayerPrefs.SaveInt(GameSaveKeys.Vibration, 1);
+        }
+
         HomeButton.onClick.AddListener(Home);
         VibrationButton.onClick.AddListener(Vibration);
         RateUsButton.onClick.AddListener(RateUs);
@@ -43,6 +48,17 @@ public class Settings : BasicScreen
     public override void SetScreen()
     {
         SetText();
+
+        int vibrationState = SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.Vibration);
+        switch (vibrationState)
+        {
+            case 0:
+                VibrationButton.GetComponent<Image>().sprite = _off;
+                break;
+            case 1:
+                VibrationButton.GetComponent<Image>().sprite = _on;
+                break;
+        }
     }
 
     private void SetText()
@@ -58,10 +74,6 @@ public class Settings : BasicScreen
 
     private void Vibration()
     {
-        if (!SaveManager.PlayerPrefs.IsSaved(GameSaveKeys.Vibration))
-        {
-            SaveManager.PlayerPrefs.SaveInt(GameSaveKeys.Vibration, 1);
-        }
         int vibrationState = SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.Vibration);
         switch(vibrationState)
         {
