@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Orbit_Manager : PlayerEditor
 {
+    [SerializeField] private TMP_Text gameScore;
     //PlayerMovement
     public float speed = -100;
     SpriteRenderer playerSprite;
     GameManager gameManager;
     //Instance
     public static Orbit_Manager inst;
+
+    private bool _isPaused;
     #region Player
     private void Awake()
     {
@@ -25,13 +29,26 @@ public class Orbit_Manager : PlayerEditor
     {
         StartCoroutine(Spawner());
     }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
     void Update()
     {
+        if(_isPaused)
+        {
+            return;
+        }
        transform.parent.transform.Rotate(0, 0, speed * Time.unscaledDeltaTime);
         if (Input.GetButtonDown("Fire1"))
         {
             Direction();
         }
+    }
+
+    public void Pause(bool isPaused)
+    {
+        _isPaused = isPaused;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,18 +59,24 @@ public class Orbit_Manager : PlayerEditor
             {
                 Time.timeScale += 0.05f;
             }
-            gameManager.scoreManager.AddScore();
-            gameManager.coins += 1;
-            gameManager.soundManager.PlaySound(0);
+           
+            ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, 1);
+            int score = ResourcesManager.Instance.GetResource(ResourceTypes.Score);
+            gameScore.text = score.ToString();
+            //gameManager.scoreManager.AddScore();
+            //gameManager.coins += 1;
+            //gameManager.soundManager.PlaySound(0);
         }
         if (collision.CompareTag("Enemy"))
         {
             Time.timeScale = 0;
             this.enabled = false;
             StopAllCoroutines();
-            gameManager.Lose();
-            gameManager.scoreManager.SaveGameScore();
-            gameManager.soundManager.PlaySound(1);
+
+            UIManager.Instance.ShowPopup(PopupTypes.Lose);
+            //gameManager.Lose();
+           // gameManager.scoreManager.SaveGameScore();
+            //gameManager.soundManager.PlaySound(1);
         }
     }
     public void Direction()

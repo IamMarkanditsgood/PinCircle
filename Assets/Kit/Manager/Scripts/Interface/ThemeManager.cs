@@ -32,9 +32,9 @@ public class ThemeManager : MonoBehaviour
     }
     public void RandomTheme()
     {
-        i = UnityEngine.Random.Range
+        /*i = UnityEngine.Random.Range
             (0, themes.Length);
-        SetTheme();
+        SetTheme();*/
     }
     void SetTheme()
     {

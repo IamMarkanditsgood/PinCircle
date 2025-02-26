@@ -11,29 +11,29 @@ public class SoundManager : MonoBehaviour
     public static SoundManager inst;
     void Awake()
     {
-        inst = this;
+        /*inst = this;
         GameObject buttonObject = GameObject.FindGameObjectWithTag("soundButton");
         buttonImage = buttonObject.GetComponent<Image>();
         Button b = buttonObject.GetComponent<Button>();
         b.onClick.AddListener(() => { ToggleAudio(); });
-        SetToggle();
+        SetToggle();*/
     }
     void SetToggle()
     {
-        if (AudioListener.volume == 1)
+        /*if (AudioListener.volume == 1)
         {
             buttonImage.sprite = buttonSprites[1];
         }
-        else { buttonImage.sprite = buttonSprites[0]; }
+        else { buttonImage.sprite = buttonSprites[0]; }*/
     }
     public void ToggleAudio()
     {
-        if (AudioListener.volume == 1) { AudioListener.volume = 0; }
+        /*if (AudioListener.volume == 1) { AudioListener.volume = 0; }
         else { AudioListener.volume = 1; }
-        SetToggle();
+        SetToggle();*/
     }
     public void PlaySound(int i)
     {
-        AudioSource.PlayClipAtPoint(sounds[i], Vector3.zero);
+        /*AudioSource.PlayClipAtPoint(sounds[i], Vector3.zero);*/
     }
 }
