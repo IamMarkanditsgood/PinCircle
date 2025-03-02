@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.iOS;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Orbit_Manager : PlayerEditor
 {
@@ -15,6 +16,8 @@ public class Orbit_Manager : PlayerEditor
     public static Orbit_Manager inst;
 
     private bool _isPaused;
+
+    public int currentScore = 0;
     #region Player
     private void Awake()
     {
@@ -65,10 +68,14 @@ public class Orbit_Manager : PlayerEditor
             {
                 Time.timeScale += 0.05f;
             }
-           
-            ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, 1);
+            currentScore++;
+            ResourcesManager.Instance.ModifyResource(ResourceTypes.Score , 1);
             int score = ResourcesManager.Instance.GetResource(ResourceTypes.Score);
-            gameScore.text = score.ToString();
+            gameScore.text = currentScore.ToString();
+            if (SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.BestScore) < currentScore)
+            {
+                SaveManager.PlayerPrefs.SaveInt(GameSaveKeys.BestScore, currentScore);
+            }
             //gameManager.scoreManager.AddScore();
             //gameManager.coins += 1;
             //gameManager.soundManager.PlaySound(0);
@@ -78,7 +85,6 @@ public class Orbit_Manager : PlayerEditor
             Time.timeScale = 0;
             this.enabled = false;
             StopAllCoroutines();
-
             UIManager.Instance.ShowPopup(PopupTypes.Lose);
             //gameManager.Lose();
            // gameManager.scoreManager.SaveGameScore();
@@ -159,6 +165,7 @@ public class Orbit_Manager : PlayerEditor
     public override void Reset()
     {
         transform.parent.rotation = Quaternion.identity;
+        currentScore =  0;
     }
     #endregion
 }

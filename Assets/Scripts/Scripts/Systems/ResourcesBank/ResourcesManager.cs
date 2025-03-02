@@ -16,7 +16,6 @@ public class ResourcesManager : MonoBehaviour
         {
             Instance = this;
         }
-        SaveManager.Resources.SaveResource(ResourceTypes.Score, 0);
         InitResourceDictionary(); 
     }
 
@@ -36,11 +35,6 @@ public class ResourcesManager : MonoBehaviour
             _resources[resource] += updateAmount;
         }
         SaveManager.Resources.SaveResource(resource, _resources[resource]);
-
-        if(_resources[ResourceTypes.Score] > SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.BestScore))
-        {
-            SaveManager.PlayerPrefs.SaveInt(GameSaveKeys.BestScore, _resources[ResourceTypes.Score]);
-        }
 
         if(_resources[resource] == 10)
         {

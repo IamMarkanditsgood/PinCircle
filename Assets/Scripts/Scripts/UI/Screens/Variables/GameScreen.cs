@@ -40,7 +40,6 @@ public class GameScreen : BasicScreen
     private void HomePressed()
     {
         playerPolygonCollider2D.enabled = false;
-        ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, 0, true);
         _orbitManager.enabled = false;
         UIManager.Instance.ShowScreen(ScreenTypes.MainMenu);
     }

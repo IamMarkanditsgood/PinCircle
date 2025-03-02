@@ -63,7 +63,7 @@ public class Settings : BasicScreen
 
     private void SetText()
     {
-        int coins = SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.BestScore);
+        int coins = ResourcesManager.Instance.GetResource(ResourceTypes.Score);
         _textManager.SetText(coins, _score, true);
     }
 

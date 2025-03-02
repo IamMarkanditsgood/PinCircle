@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Pause : BasicPopup
 {
-
     [SerializeField] private TMP_Text _score;
     [SerializeField] private Button _homeButton;
     [SerializeField] private Button _pauseButton;
@@ -30,12 +29,11 @@ public class Pause : BasicPopup
 
     public override void SetPopup()
     {
-        _score.text = ResourcesManager.Instance.GetResource(ResourceTypes.Score).ToString();
+        _score.text = _orbitManager.currentScore.ToString();
     }
 
     private void HomePressed()
     {
-        ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, 0, true);
         _orbitManager.enabled = false;
         UIManager.Instance.ShowScreen(ScreenTypes.MainMenu);
     }

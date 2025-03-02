@@ -45,6 +45,25 @@ public class PlayerPrefStorage
         return new List<string>(serializedList.Split('|'));
     }
 
+    public void SaveIntList(string key, List<int> list)
+    {
+        string serializedList = string.Join(",", list);
+        PlayerPrefs.SetString(key, serializedList);
+        PlayerPrefs.Save();
+    }
+
+    public List<int> LoadIntList(string key)
+    {
+        string serializedList = PlayerPrefs.GetString(key, string.Empty);
+        if (string.IsNullOrEmpty(serializedList))
+        {
+            return new List<int>();
+        }
+
+        return serializedList.Split(',')
+                             .Select(s => int.TryParse(s, out int result) ? result : 0)
+                             .ToList();
+    }
     public T LoadEnum<T>(string key, T defaultValue) where T : struct, Enum
     {
         string savedValue = PlayerPrefs.GetString(key, defaultValue.ToString());

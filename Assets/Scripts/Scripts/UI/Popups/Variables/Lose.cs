@@ -30,15 +30,14 @@ public class Lose : BasicPopup
     {
         Time.timeScale = 0f;
         _orbitManager.enabled = false;
-        Debug.Log(ResourcesManager.Instance.GetResource(ResourceTypes.Score));
-        _score.text = ResourcesManager.Instance.GetResource(ResourceTypes.Score).ToString();
+        _score.text = _orbitManager.currentScore.ToString();
     }
 
     private void StartAgain()
     {
         Time.timeScale = 1;
-        _orbitManager.enabled = true;
-        ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, 0, true);
+        _orbitManager.Reset();
+        _orbitManager.enabled = true;     
         UIManager.Instance.HidePopup(PopupType);
         UIManager.Instance.ShowScreen(ScreenTypes.Game);
     }
