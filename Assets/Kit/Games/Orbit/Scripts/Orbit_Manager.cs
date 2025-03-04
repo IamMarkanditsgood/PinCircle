@@ -147,7 +147,7 @@ public class Orbit_Manager : PlayerEditor
     }
     void CreatePool()
     {
-        int max = 10;
+        int max = 100;
         enemies = new GameObject[max];
         RandomPointPosition();
         for(int i = 0; i < max; i++)
