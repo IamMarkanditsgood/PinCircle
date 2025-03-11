@@ -99,9 +99,9 @@ public class UIManagerTwo : MonoBehaviour {
 	{
 		SceneManager.LoadScene("Game");
 	}
-
-	//hide pause menu
-	public void HidePauseMenu()
+    
+    //hide pause menu
+    public void HidePauseMenu()
 	{
 		Debug.Log("hIDEpA");
 		GameManagerTwo.Instance.player.GetComponent<Player>().PlayerPause(false);

@@ -12,7 +12,7 @@ public class ScoreManagerTwo : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
 
         if (Instance == null)
             Instance = this;
@@ -35,10 +35,10 @@ public class ScoreManagerTwo : MonoBehaviour
     //save and update highscore
     void UpdateHighScore()
     {
-        if (currentScore > highScore)
-            highScore = currentScore;
-
-        PlayerPrefs.SetInt(Constants.HIGH_SCORE, highScore);
+        if (SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.BestScore) < currentScore)
+        {
+            SaveManager.PlayerPrefs.SaveInt(GameSaveKeys.BestScore, currentScore);
+        }
     }
 
     //update currentscore

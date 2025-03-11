@@ -13,7 +13,8 @@ public class Home : BasicScreen
     [SerializeField] private Button Shop;
     [SerializeField] private Button Info;
     [SerializeField] private Button Settings;
-    [SerializeField] private Button Play;
+    [SerializeField] private Button Game1;
+    [SerializeField] private Button Game2;
 
     [SerializeField] private SpriteRenderer _player;
     [SerializeField] private Sprite[] _playerSprites;
@@ -30,21 +31,26 @@ public class Home : BasicScreen
         Shop.onClick.AddListener(ShopPressed);
         Info.onClick.AddListener(InfoPressed);
         Settings.onClick.AddListener(SettingsPressed);
-        Play.onClick.AddListener(PlayGame);
+        Game1.onClick.AddListener(PlayGame1);
+        Game2.onClick.AddListener(PlayGame2);
     }
 
-    private void PlayGame()
+    private void PlayGame1()
     {
-        UIManager.Instance.ShowScreen(ScreenTypes.Game);
+        UIManager.Instance.ShowScreen(ScreenTypes.Home);
     }
-
+    private void PlayGame2()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
     private void OnDestroy()
     {
         Tasks.onClick.RemoveListener(TasksPressed);
         Shop.onClick.RemoveListener(ShopPressed);
         Info.onClick.RemoveListener(InfoPressed);
         Settings.onClick.RemoveListener(SettingsPressed);
-        Play.onClick.RemoveListener(PlayGame);
+        Game1.onClick.RemoveListener(PlayGame1);
+        Game2.onClick.RemoveListener(PlayGame2);
     }
 
     public override void ResetScreen()

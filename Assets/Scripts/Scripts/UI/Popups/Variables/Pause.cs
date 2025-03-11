@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Pause : BasicPopup
@@ -34,8 +35,9 @@ public class Pause : BasicPopup
 
     private void HomePressed()
     {
+        Time.timeScale = 1;
         _orbitManager.enabled = false;
-        UIManager.Instance.ShowScreen(ScreenTypes.MainMenu);
+        SceneManager.LoadScene("Game");
     }
     private void PausePressed()
     {

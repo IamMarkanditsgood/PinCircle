@@ -37,7 +37,8 @@ public class GameManagerTwo : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        Time.timeScale = 1;
+        //DontDestroyOnLoad(this);
 
         if (Instance == null)
             Instance = this;

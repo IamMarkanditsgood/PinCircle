@@ -12,7 +12,7 @@ public class Obstacle : MonoBehaviour
     public void Init(Transform camera, Color color, float rotationSpeed)
     {
         cameraTransform = camera;
-        sprite.color = color;
+        //sprite.color = color;
 
         if (Random.Range(0,2) == 0)
             rotation = rotationSpeed;

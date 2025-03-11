@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -15,10 +16,11 @@ public class UIManager: MonoBehaviour
         {
             Instance = this;
         }
+        
         InitScreens();
         ShowScreen(ScreenTypes.MainMenu);
     }
-
+    
     private void InitScreens()
     {
         foreach (var screen in _screens)
