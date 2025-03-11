@@ -25,7 +25,7 @@ public class CoinManager : MonoBehaviour {
 
     void Start()
     {
-        coins = PlayerPrefs.GetInt(Constants.COINS, initialCoins);
+        coins = ResourcesManager.Instance.GetResource(ResourceTypes.Score);
         UpdateCoinsText();
     }
 
@@ -33,9 +33,9 @@ public class CoinManager : MonoBehaviour {
     public void PickCoin(int amount)
     {
         AudioManager.Instance.PlayEffects(AudioManager.Instance.pickCoin);
-        coins += amount;
-        coinsText.text = coins.ToString();
-        PlayerPrefs.SetInt(Constants.COINS, coins);
+        ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, amount);
+        coins = ResourcesManager.Instance.GetResource(ResourceTypes.Score);
+        coinsText.text = coins.ToString();     
     }
 
     //update coins text
@@ -118,8 +118,8 @@ public class CoinManager : MonoBehaviour {
                 }
             }
 
-            updatingCoins = false;
-            PlayerPrefs.SetInt(Constants.COINS, coins);
+            updatingCoins = false; 
+            ResourcesManager.Instance.ModifyResource(ResourceTypes.Score, coins, true);
         }
     }
 }

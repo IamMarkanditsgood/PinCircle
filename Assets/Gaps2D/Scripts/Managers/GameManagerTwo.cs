@@ -53,7 +53,7 @@ public class GameManagerTwo : MonoBehaviour
 
         Application.targetFrameRate = 60;
 
-        player.GetComponent<Player>().SetSkin(SkinManager.Instance.playerSkins[PlayerPrefs.GetInt(Constants.SKIN_SELECTED, 0)]);
+        player.GetComponent<Player>().SetSkin(SkinManager.Instance.playerSkins[SaveManager.PlayerPrefs.LoadInt(GameSaveKeys.SavedPlayer)]);
 
         NewGame();
     }

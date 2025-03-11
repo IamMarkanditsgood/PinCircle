@@ -50,6 +50,7 @@ public class SkinManager : MonoBehaviour
         for (int i = 0; i < playerSkins.Length; i++)
         {
             tempObject = Instantiate(skinPrefab, skinsParent);
+            
             tempObject.GetComponent<SkinPrefab>().SetSkin(i, playerSkins[i].playerSprite);
             skins.Add(tempObject);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManagerTwo : MonoBehaviour {
@@ -94,9 +95,15 @@ public class UIManagerTwo : MonoBehaviour {
 		AudioManager.Instance.PlayEffects(AudioManager.Instance.buttonClick);
 	}
 
+	public void GoHome()
+	{
+		SceneManager.LoadScene("Game");
+	}
+
 	//hide pause menu
 	public void HidePauseMenu()
 	{
+		Debug.Log("hIDEpA");
 		GameManagerTwo.Instance.player.GetComponent<Player>().PlayerPause(false);
 		guiAnimator.Play("HidePause");
 		Time.timeScale = 1;
