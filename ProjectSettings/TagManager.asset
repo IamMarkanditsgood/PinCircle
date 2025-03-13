@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Point
   - Coins
+  - Walls
+  - Obstacle
+  - Coin
   layers:
   - Default
   - TransparentFX
